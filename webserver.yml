@@ -1,0 +1,7 @@
+---
+- name: Setup webserver
+  hosts: webserver
+  roles:
+    - install_docker
+    - service_backend
+...

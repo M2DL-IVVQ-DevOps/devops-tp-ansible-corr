@@ -1,0 +1,27 @@
+---
+
+- name: Create folder
+  ansible.builtin.file:
+    path: /opt/mysql
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: Create database container
+  community.docker.docker_container:
+    name: mysql
+    image: mysql:8
+    state: started
+    recreate: true
+    restart_policy: always
+    ports:
+      - 3306:3306
+    volumes:
+      - /opt/mysql:/var/lib/mysql
+    env:
+      MYSQL_ROOT_PASSWORD: "dummypassword"
+      MYSQL_USER: "todos-user"
+      MYSQL_PASSWORD: "dummytodos"
+      MYSQL_DATABASE: "todos"
+
+...

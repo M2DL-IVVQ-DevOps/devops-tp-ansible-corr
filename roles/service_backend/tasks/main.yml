@@ -1,0 +1,14 @@
+---
+
+- name: Create backend
+  community.docker.docker_container:
+    name: webserver
+    image: alexdbs/todo-webapp:master
+    state: started
+    recreate: true
+    restart_policy: always
+    network_mode: host
+    env:
+      RDS_HOSTNAME: "{{ database_host }}"
+
+...

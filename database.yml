@@ -1,0 +1,7 @@
+---
+- name: Setup database
+  hosts: database
+  roles:
+    - install_docker
+    - service_database
+...
